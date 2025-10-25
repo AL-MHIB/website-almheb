@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wael (ALMHEB) | محلل أمن سيبراني</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #00ffc3;
+      --secondary-color: #0e0e0e;
+      --accent-color: #2c5364;
+      --text-color: #e0e0e0;
+      --card-bg: #1a1a1a;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--secondary-color);
+      color: var(--text-color);
+      direction: rtl;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 15px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 50px 25px 70px;
+      background: linear-gradient(90deg, #0f2027, #203a43, var(--accent-color));
+      border-radius: 15px;
+      box-shadow: 0 0 40px #00ffc3aa inset;
+      max-width: 900px;
+      width: 100%;
+      margin-bottom: 50px;
+      transition: background 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(0, 255, 195, 0.1), transparent);
+      z-index: 1;
+    }
+
+    .hero:hover {
+      background: linear-gradient(90deg, #00ffc3, #20d9b9, #2ce5cc);
+      color: #000;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .profile-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 4px solid var(--primary-color);
+      object-fit: cover;
+      margin-bottom: 25px;
+      box-shadow: 0 0 18px #00ffc3cc;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.1);
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    .nickname {
+      color: var(--primary-color);
+      font-weight: 800;
+      text-shadow: 0 0 12px var(--primary-color);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 30px;
+      opacity: 0.85;
+      letter-spacing: 0.7px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .buttons a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 12px;
+      padding: 14px 34px;
+      background-color: var(--primary-color);
+      color: var(--secondary-color);
+      border-radius: 28px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(0, 255, 195, 0.5);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    .buttons a:hover {
+      background-color: #00d1a3;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0, 255, 195, 0.8);
+    }
+
+    section {
+      max-width: 900px;
+      width: 100%;
+      background-color: var(--card-bg);
+      padding: 35px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00000080;
+      margin-bottom: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      text-shadow: 0 0 10px var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    section h2 i {
+      font-size: 1.8rem;
+    }
+
+    section p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      opacity: 0.9;
+    }
+
+    .skills ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .skills li {
+      background: var(--primary-color);
+      color: var(--secondary-color);
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 255, 195, 0.5);
+      cursor: default;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skills li:hover {
+      background-color: #00d1a3;
+      transform: translateY(-3px);
+    }
+
+    .contact p {
+      margin-bottom: 12px;
+      font-size: 1.15rem;
+    }
+
+    .contact a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 8px;
+      transition: color 0.3s ease;
+      user-select: text;
+    }
+
+    .contact a:hover {
+      color: #00d1a3;
+      text-decoration: underline;
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    .project-card {
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .project-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 8px 25px rgba(0, 255, 195, 0.2);
+    }
+
+    .project-card h3 {
+      color: var(--primary-color);
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .project-card p {
+      flex-grow: 1;
+      margin-bottom: 20px;
+      opacity: 0.85;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .project-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background-color: var(--primary-color);
+      color: var(--secondary-color);
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .project-links a:hover {
+      background-color: #00d1a3;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .project-tech span {
+      background: rgba(0, 255, 195, 0.1);
+      color: var(--primary-color);
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(0, 255, 195, 0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .buttons a {
+        padding: 12px 24px;
+        font-size: 1rem;
+      }
+      section h2 {
+        font-size: 1.6rem;
+      }
+      .skills li {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+      .project-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-content">
+      <img src="profile.jpg" alt="ALMHEB" class="profile-photo" />
+      <h1>Wael <span class="nickname">(ALMHEB)</span></h1>
+      <p>محلل أمن سيبراني | Bug Bounty | مطور باك-فرونت</p>
+      <div class="buttons">
+        <a href="https://github.com/AL-MHIB" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="https://t.me/F5FFF" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-telegram"></i> Telegram
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="about">
+    <h2><i class="fas fa-user"></i> من أنا</h2>
+    <p>
+      أنا Wael، المعروف بـ ALMHEB، محلل أمن سيبراني وصياد ثغرات، أعمل في مجال اكتشاف الثغرات
+      وتطوير حلول الحماية. أملك خبرة في عدة لغات برمجة مثل Python و PHP و Flutter،
+      وأجمع بين المهارات الفنية والواجهات.
+    </p>
+  </section>
+
+  <section class="projects">
+    <h2><i class="fas fa-code-branch"></i> مشاريعي</h2>
+    <p>إليك قائمة بأهم المشاريع والأدوات التي قمت بتطويرها:</p>
+    
+    <div class="projects-grid">
+      <!-- Project 1 -->
+      <div class="project-card">
+        <h3><i class="fas fa-shield-alt"></i> أداة فحص حسابات ستيم</h3>
+        <p>أداة بواجهة رسومية تستقبل ملف كومبو يحتوي أسطرًا بصيغة user:pass. تستورد القوائم، تنفّذ محاولات مصادقة تجريبية/تحليلية، وتُظهر النتائج في واجهة مع إمكانية تصدير.</p>
+        <div class="project-tech">
+          <span>Python</span>
+          <span>Security</span>
+          <span>Automation</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AL-MHIB/steam" target="_blank">
+            <i class="fab fa-github"></i> عرض الكود
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <h3><i class="fas fa-bug"></i> SQL Tool</h3>
+        <p>أداة سطر أو واجهة بسيطة للتعامل مع قواعد بيانات SQL. مصممة للاختبار التعليمي والتحليل السريع للاستعلامات. مناسبة للتجارب المحلية وليس للاستخدام ضد قواعد بيانات ليس لديك إذنًا عليها.</p>
+        <div class="project-tech">
+          <span>Python</span>
+          <span>SQL</span>
+          <span>CLI</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AL-MHIB/sql" target="_blank">
+            <i class="fab fa-github"></i> عرض الكود
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <h3><i class="fas fa-tools"></i> XSS Site Scanner</h3>
+        <p>برنامج رسومي متقدم لفحص ثغرات XSS (Cross-Site Scripting) في المواقع، مكتوب بلغة Python باستخدام مكتبة Tkinter.</p>
+        <div class="project-tech">
+          <span>Python</span>
+          <span>Tkinter</span>
+          <span>Security</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AL-MHIB/xss_site" target="_blank">
+            <i class="fab fa-github"></i> عرض الكود
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card">
+        <h3><i class="fas fa-mobile-alt"></i>Tool almmheb</h3>
+        <p>almheb is a tool that can remotely capture the exact GPS coordinates of a target device using a PHP server, and can also grab basic information about the system and ISP. This tool can be very helpful in information gathering. you can get following information of the target device</p>
+        <div class="project-tech">
+          <span>PHP</span>
+          <span>Geolocation</span>
+          <span>OSINT</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AL-MHIB/almheb" target="_blank">
+            <i class="fab fa-github"></i> عرض الكود
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="project-card">
+        <h3><i class="fas fa-network-wired"></i> موقع طقسنا</h3>
+        <p>موقع لمعرفة الطقس في كل البلدان</p>
+        <div class="project-tech">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+        </div>
+        <div class="project-links">
+          <a href="https://al-mhib.github.io/TaqsLive/" target="_blank">
+            <i class="fab fa-github"></i> عرض الكود
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 6 -->
+      <div class="project-card">
+        <h3><i class="fas fa-lock"></i> adminfinder</h3>
+        <p>To search for more than 350 control panels</p>
+        <div class="project-tech">
+          <span>Python</span>
+          <span>Web</span>
+          <span>Recon</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AL-MHIB/adminfinder" target="_blank">
+            <i class="fab fa-github"></i> عرض الكود
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="skills">
+    <h2><i class="fas fa-cogs"></i> مهاراتي</h2>
+    <ul>
+      <li><i class="fas fa-shield-alt"></i> تحليل الثغرات الأمنية</li>
+      <li><i class="fas fa-bug"></i> Bug Bounty</li>
+      <li><i class="fab fa-python"></i> Python, PHP, Flutter</li>
+      <li><i class="fas fa-code"></i> تطوير المواقع - Back & Front</li>
+    </ul>
+  </section>
+
+  <section class="contact">
+    <h2><i class="fas fa-envelope"></i> تواصل معي</h2>
+    <p>يمكنك التواصل معي عبر:</p>
+    <a href="https://t.me/F5FFF" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-telegram"></i> Telegram
+    </a> |
+    <a href="https://github.com/AL-MHIB" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+  </section>
+
+  <script>
+    // إضافة تأثيرات تفاعلية إضافية
+    document.addEventListener('DOMContentLoaded', function() {
+      // تأثيرات للبطاقات عند التمرير
+      const cards = document.querySelectorAll('.project-card');
+      
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+      
+      cards.forEach(card => {
+        card.style.opacity = 0;
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(card);
+      });
+    });
+  </script>
+</body>
+</html>
